@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class student
@@ -43,9 +44,7 @@ void student::setstudent_id(string sid){
 void student::setname(string n){
     name=n;}
 void student::setbalance(float ba){
-    if(ba>20||ba<0)
-    balance=11.11;
-    else balance=ba;}
+    balance=ba;}
 void student::setis_active(bool active){
 is_active=active;}            
 int student::getuser_id(){return user_id;}
@@ -54,3 +53,11 @@ string student::getname(){return name;}
 string student::getemail(){return email;}
 float student::getbalance(){return balance;}
 bool student::getis_active(){return is_active;}
+enum meal_type{type1,type2};
+class Meal{
+    int meal_id;
+    string namemeal;
+    enum meal_type{type1,type2};
+    float price;
+    vector<int> side_items;
+};
