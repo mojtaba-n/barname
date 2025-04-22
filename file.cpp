@@ -26,6 +26,12 @@ void setname(string);
 void setemail(string);
 void setbalance(float);
 void setis_active(bool);
+int getuser_id();
+string getstudent_id();
+string getname();
+string getemail();
+float getbalance();
+bool getis_active();
 
 };
 void student::setuser_id(int uid){
@@ -42,4 +48,9 @@ void student::setbalance(float ba){
     else balance=ba;}
 void student::setis_active(bool active){
 is_active=active;}            
-
+int student::getuser_id(){return user_id;}
+string student::getstudent_id(){return student_id;}
+string student::getname(){return name;}
+string student::getemail(){return email;}
+float student::getbalance(){return balance;}
+bool student::getis_active(){return is_active;}
