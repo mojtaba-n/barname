@@ -58,6 +58,27 @@ class Meal{
     int meal_id;
     string namemeal;
     enum meal_type{type1,type2};
+    meal_type t;
     float price;
-    vector<int> side_items;
+    vector<string> side_items;
+public:
+Meal(int id,string nm,meal_type s,float p,const vector<string>& items){
+setmeal_id(id);
+setnamemeal(nm);
+meal_type t= meal_type(s);
+setside_item(items);
+}
+void setmeal_id(int);
+void setnamemeal(string);
+void setmeal_type(meal_type);
+void setside_item(const vector<string>& newside_item);
 };
+void Meal::setmeal_id(int id){
+    meal_id=id;}
+void Meal::setnamemeal(string n){
+    namemeal=n;}
+void Meal::setmeal_type(meal_type s){
+    meal_type t = meal_type(s);}
+void Meal::setside_item(const vector<string>& newside_item){
+    side_items=newside_item;
+}
