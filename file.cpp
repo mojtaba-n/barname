@@ -65,6 +65,7 @@ public:
 Meal(int id,string nm,meal_type s,float p,const vector<string>& items){
 setmeal_id(id);
 setnamemeal(nm);
+setprice(p);
 meal_type t= meal_type(s);
 setside_item(items);
 }
@@ -72,6 +73,13 @@ void setmeal_id(int);
 void setnamemeal(string);
 void setmeal_type(meal_type);
 void setside_item(const vector<string>& newside_item);
+void setprice(float);
+void update_price(float);
+void add_side_item(const string& sid_item);
+int getmeal_id()const{return meal_id;}
+string getnamemeal()const{return namemeal;}
+float getorice()const{return price;}
+meal_type getmeal_type()const{return t;}    
 };
 void Meal::setmeal_id(int id){
     meal_id=id;}
@@ -80,5 +88,14 @@ void Meal::setnamemeal(string n){
 void Meal::setmeal_type(meal_type s){
     meal_type t = meal_type(s);}
 void Meal::setside_item(const vector<string>& newside_item){
-    side_items=newside_item;
-}
+    side_items=newside_item;}
+void Meal::setprice(float p){
+    price=p;}
+void Meal::update_price(float new_price){
+    price=new_price;}
+void Meal::add_side_item(const string& sid_item){
+    side_items.push_back(sid_item);}
+    
+
+
+  
