@@ -80,6 +80,7 @@ int getmeal_id()const{return meal_id;}
 string getnamemeal()const{return namemeal;}
 float getorice()const{return price;}
 meal_type getmeal_type()const{return t;}    
+void print();
 };
 void Meal::setmeal_id(int id){
     meal_id=id;}
@@ -95,7 +96,15 @@ void Meal::update_price(float new_price){
     price=new_price;}
 void Meal::add_side_item(const string& sid_item){
     side_items.push_back(sid_item);}
-    
+void Meal::print(){
+    cout<<"name meal:"<<namemeal<<"\n id meal:"<<meal_id
+    <<"\n price:"<<price<<"\n meal type:"<<t;
+    cout<<"\n side items:";
+    for (int i=0;i<side_items.size();++i){
+        cout<<" "<<side_items[i];
+    }
+}    
+
 
 
   
