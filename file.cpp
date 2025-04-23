@@ -122,6 +122,7 @@ int gethall_id(){return hall_id;}
 string getname_dininghall(){return name_dininghall;}
 string getaddress(){return address;}
 int getcapacity(){return capacity;}
+void print();
 };
 void DiningHall::sethall_id(int id){
     if(id<1000||9999<id)
@@ -134,8 +135,12 @@ void DiningHall::setaddress(string ads){
 void DiningHall::setcapacity(int cpc){
     if(cpc<0){
         capacity=cpc*(-1);}
-    else capacity=cpc;    
-}         
+    else capacity=cpc;}
+void DiningHall::print(){
+    cout<<"\nname Dininghall:"<<name_dininghall
+    <<"\nId Dininghall:"<<hall_id<<"\naddress:"
+    <<address<<"\ncapacity:"<<capacity;}        
+
 
 
   
