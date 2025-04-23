@@ -101,10 +101,24 @@ void Meal::print(){
     <<"\n price:"<<price<<"\n meal type:"<<t;
     cout<<"\n side items:";
     for (int i=0;i<side_items.size();++i){
-        cout<<" "<<side_items[i];
-    }
-}    
-
+        cout<<" "<<side_items[i];}
+}
+class DiningHall{
+int hall_id;
+string name_dininghall;
+string address;
+int capacity;
+public:
+DiningHall(int id ,string name ,string ads,int cpc){
+sethall_id(id);
+name_dininghall=name;
+address=ads;
+setcapacity(cpc);}
+void sethall_id(int);
+void setname_dininghall(string);
+void setaddress(string);
+void setcapacity(int);   
+};
 
 
   
