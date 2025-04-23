@@ -118,7 +118,24 @@ void sethall_id(int);
 void setname_dininghall(string);
 void setaddress(string);
 void setcapacity(int);   
+int gethall_id(){return hall_id;}
+string getname_dininghall(){return name_dininghall;}
+string getaddress(){return address;}
+int getcapacity(){return capacity;}
 };
+void DiningHall::sethall_id(int id){
+    if(id<1000||9999<id)
+     hall_id=1000;
+     else hall_id=id;}
+void DiningHall::setname_dininghall(string name){
+    name_dininghall=name;}
+void DiningHall::setaddress(string ads){
+    address=ads;}
+void DiningHall::setcapacity(int cpc){
+    if(cpc<0){
+        capacity=cpc*(-1);}
+    else capacity=cpc;    
+}         
 
 
   
