@@ -164,6 +164,14 @@ public:
     void setmeal(Meal);
     void setstatus(Status);
     void setcreated_at(time_t);
+    int getreservation_id(){return reservation_id;}
+    student getstudent(){return Student;}
+    DiningHall getdhall(){return dhall;}
+    Meal getmeal(){return meal;}
+    Status getstatus (){return status;}
+    time_t getcreated_at(){return created_at;}
+    bool cancel();
+    void print();
     };
     void Reservation::setreservatin_id(int id){
         reservation_id=id;}
@@ -177,4 +185,14 @@ public:
         status=s;}            
     void Reservation::setcreated_at(time_t t){
         created_at=t;}
-          
+    bool Reservation::cancel(){
+        if(status==cancelreserv){return true;}
+        else return false;
+    }
+    void Reservation::print(){
+        Student.print();
+        meal.print();
+        dhall.print();
+        cout<<"\nreservation id:"<<reservation_id
+        <<"\ncreated at :"<<created_at;
+    }
