@@ -158,6 +158,23 @@ public:
         status=s;
         created_at=craet;
     }
+    void setreservatin_id(int);
+    void setstudent(student);
+    void setdhll(DiningHall);
+    void setmeal(Meal);
+    void setstatus(Status);
+    void setcreated_at(time_t);
     };
-
-  
+    void Reservation::setreservatin_id(int id){
+        reservation_id=id;}
+    void Reservation::setstudent(student st){
+        Student=st;}
+    void Reservation::setdhll(DiningHall d){
+        dhall=d;}
+    void Reservation::setmeal(Meal m){
+        meal=m;}
+    void Reservation::setstatus(Status s){
+        status=s;}            
+    void Reservation::setcreated_at(time_t t){
+        created_at=t;}
+          
