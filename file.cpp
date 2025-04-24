@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <ctime>
 using namespace std;
 
 class student
@@ -13,14 +14,14 @@ float balance;
 bool is_active;
 
 public:
-student(int uid,string sid,string n,string mail,float ba,bool active){
+student(int uid=1000,string sid="403122",string n="None",string mail="nothing@email.com",float ba=00.00,bool active=true){
     setuser_id(uid);
     setstudent_id(sid);
     setname(n);
     setemail(mail);
     setbalance(ba);
     setis_active(active);
-};
+}
 void setuser_id(int);
 void setstudent_id(string);
 void setname(string);
@@ -62,7 +63,7 @@ class Meal{
     float price;
     vector<string> side_items;
 public:
-Meal(int id,string nm,meal_type s,float p,const vector<string>& items){
+Meal(int id=100,string nm="None",meal_type s=type1,float p=00.00,const vector<string>& items={}){
 setmeal_id(id);
 setnamemeal(nm);
 setprice(p);
@@ -109,7 +110,7 @@ string name_dininghall;
 string address;
 int capacity;
 public:
-DiningHall(int id ,string name ,string ads,int cpc){
+DiningHall(int id=10 ,string name="None" ,string ads="nothing",int cpc=0){
 sethall_id(id);
 name_dininghall=name;
 address=ads;
@@ -140,7 +141,23 @@ void DiningHall::print(){
     cout<<"\nname Dininghall:"<<name_dininghall
     <<"\nId Dininghall:"<<hall_id<<"\naddress:"
     <<address<<"\ncapacity:"<<capacity;}        
-
-
+class Reservation{
+int reservation_id;
+student Student;
+DiningHall dhall;
+Meal meal;
+enum Status{reserv ,notreserv,cancelreserv};
+Status status;
+time_t created_at;
+public:
+    Reservation(int id,student stu ,DiningHall hall, Meal m, Status s, time_t craet){
+        reservation_id=id;
+        Student=stu;
+        dhall=hall;
+        meal=m;
+        status=s;
+        created_at=craet;
+    }
+    };
 
   
