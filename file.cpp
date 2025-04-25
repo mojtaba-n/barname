@@ -34,6 +34,7 @@ string getname();
 string getemail();
 float getbalance();
 bool getis_active();
+void print();
 
 };
 void student::setuser_id(int uid){
@@ -54,16 +55,21 @@ string student::getname(){return name;}
 string student::getemail(){return email;}
 float student::getbalance(){return balance;}
 bool student::getis_active(){return is_active;}
-enum meal_type{type1,type2};
+void student::print(){
+    cout<<"user id:"<<user_id<<"student id:"<<student_id
+    <<"name:"<<name<<"email:"<<email<<"balance:"<<balance
+    <<"is active:"<<is_active;
+}
+enum meal_type { breakfast , lunch , dinner};
 class Meal{
     int meal_id;
     string namemeal;
-    enum meal_type{type1,type2};
+    
     meal_type t;
     float price;
     vector<string> side_items;
 public:
-Meal(int id=100,string nm="None",meal_type s=type1,float p=00.00,const vector<string>& items={}){
+Meal(int id=100,string nm="None",meal_type s=lunch,float p=00.00,const vector<string>& items={}){
 setmeal_id(id);
 setnamemeal(nm);
 setprice(p);
@@ -150,7 +156,7 @@ enum Status{reserv ,notreserv,cancelreserv};
 Status status;
 time_t created_at;
 public:
-    Reservation(int id,student stu ,DiningHall hall, Meal m, Status s, time_t craet){
+    Reservation(int id=10000,student stu ,DiningHall hall, Meal m, Status s=notreserv, time_t craet){
         reservation_id=id;
         Student=stu;
         dhall=hall;
