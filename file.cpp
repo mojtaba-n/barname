@@ -2,7 +2,8 @@
 #include <vector>
 #include <ctime>
 using namespace std;
-
+class Meal;
+class Reservatin;
 class student
 {
 private:
@@ -12,6 +13,7 @@ string name;
 string email;
 float balance;
 bool is_active;
+vector<Reservatin> reservations;
 
 public:
 student(int uid=1000,string sid="403122",string n="None",string mail="nothing@email.com",float ba=00.00,bool active=true){
@@ -35,7 +37,7 @@ string getemail();
 float getbalance();
 bool getis_active();
 void print();
-
+bool cancel_reservation(Reservation);
 };
 void student::setuser_id(int uid){
     if(uid<1000 || uid>9999){
@@ -59,6 +61,19 @@ void student::print(){
     cout<<"user id:"<<user_id<<"student id:"<<student_id
     <<"name:"<<name<<"email:"<<email<<"balance:"<<balance
     <<"is active:"<<is_active;
+}
+bool student::cancel_reservation(Reservation res){
+for (const Reservatin&r:reservations){
+    if (r.getreservation_id()==res.getreservation_id()){
+        if(r.cancel()){
+            balance+= res.getmeal().getprice()*0.8;
+            return true;
+        }
+
+    }
+    
+}
+return false;
 }
 enum meal_type { breakfast , lunch , dinner};
 class Meal{
@@ -85,7 +100,7 @@ void update_price(float);
 void add_side_item(const string& sid_item);
 int getmeal_id()const{return meal_id;}
 string getnamemeal()const{return namemeal;}
-float getorice()const{return price;}
+float getprice()const{return price;}
 meal_type getmeal_type()const{return t;}    
 void print();
 };
@@ -192,7 +207,9 @@ public:
     void Reservation::setcreated_at(time_t t){
         created_at=t;}
     bool Reservation::cancel(){
-        if(status==cancelreserv){return true;}
+        if(status==reserv){
+            status= cancelreserv;
+            return true;}
         else return false;
     }
     void Reservation::print(){
