@@ -5,6 +5,31 @@ using namespace std;
 class Meal;
 class Reservation;
 class DiningHall;
+class User
+{
+protected:
+int userID;
+string name;
+string lastname;
+string hashed_password;
+public:
+User(int u=1000,string n="none",string ln="_",string hp="None"){
+    setuserId(u);
+    name=n;
+    lastname=ln;
+    hashed_password=hp;
+}
+virtual void print()const;
+virtual void getType();
+void setuserId(int);
+void setname(string);
+void setlastname(string);
+void sethashpassword(string);
+int getuserID(){return userID;}  
+string getname(){return name;}
+string getlastname(){return lastname;}
+string gethashpassword(){return hashed_password;} 
+};
 class student
 {
 private:
