@@ -4,6 +4,7 @@
 using namespace std;
 class Meal;
 class Reservation;
+class DiningHall;
 class student
 {
 private:
@@ -38,7 +39,7 @@ float getbalance();
 bool getis_active();
 void print();
 bool cancel_reservation(Reservation);
-bool reserve_meal(Meal,DiningHall);
+void reserve_meal(Meal,DiningHall);
 };
 void student::setuser_id(int uid){
     if(uid<1000 || uid>9999){
@@ -73,6 +74,24 @@ for (Reservation&r:reservations){
     }  
 }
 return false;}
+void student::reserve_meal(Meal meal, DiningHall hall) {
+    if (balance < meal.getprice()) {
+        cout << "Error:no many\n";
+    }
+    for (const auto& r : reservations) {
+        if (r.getmeal().getReserveday() == meal.getReserveday() &&
+            r.getmeal().getmeal_type() == meal.getmeal_type()) {
+            cout << "Error:reserve tekrari ast\n";
+}
+    else{
+    balance -= meal.getprice();
+    time_t now = time(0);
+    Reservation new_reservation(rand() % 9000 + 1000, *this, hall, meal,reserv, now);
+    reservations.push_back(new_reservation);
+    cout << "Reservation successful\n";
+}
+}
+}
 enum Reserveday{Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday};
 enum meal_type { breakfast , lunch , dinner};
 class Meal{
@@ -102,6 +121,7 @@ int getmeal_id()const{return meal_id;}
 string getnamemeal()const{return namemeal;}
 float getprice()const{return price;}
 meal_type getmeal_type()const{return t;}    
+Reserveday getReserveday(){return r;}
 void print();
 };
 void Meal::setmeal_id(int id){
@@ -165,12 +185,12 @@ void DiningHall::print(){
     cout<<"\nname Dininghall:"<<name_dininghall
     <<"\nId Dininghall:"<<hall_id<<"\naddress:"
     <<address<<"\ncapacity:"<<capacity;}        
+enum Status{reserv ,notreserv,cancelreserv};
 class Reservation{
 int reservation_id;
 student Student;
 DiningHall dhall;
 Meal meal;
-enum Status{reserv ,notreserv,cancelreserv};
 Status status;
 time_t created_at;
 public:
@@ -188,12 +208,12 @@ public:
     void setmeal(Meal);
     void setstatus(Status);
     void setcreated_at(time_t);
-    int getreservation_id(){return reservation_id;}
-    student getstudent(){return Student;}
-    DiningHall getdhall(){return dhall;}
-    Meal getmeal(){return meal;}
-    Status getstatus (){return status;}
-    time_t getcreated_at(){return created_at;}
+    int getreservation_id()const{return reservation_id;}
+    student getstudent()const{return Student;}
+    DiningHall getdhall()const{return dhall;}
+    Meal getmeal()const{return meal;}
+    Status getstatus ()const{return status;}
+    time_t getcreated_at()const{return created_at;}
     bool cancel();
     void print();
     };
