@@ -3,7 +3,7 @@
 #include <ctime>
 using namespace std;
 class Meal;
-class Reservatin;
+class Reservation;
 class student
 {
 private:
@@ -13,7 +13,7 @@ string name;
 string email;
 float balance;
 bool is_active;
-vector<Reservatin> reservations;
+vector<Reservation> reservations;
 
 public:
 student(int uid=1000,string sid="403122",string n="None",string mail="nothing@email.com",float ba=00.00,bool active=true){
@@ -38,6 +38,7 @@ float getbalance();
 bool getis_active();
 void print();
 bool cancel_reservation(Reservation);
+bool reserve_meal(Meal,DiningHall);
 };
 void student::setuser_id(int uid){
     if(uid<1000 || uid>9999){
@@ -63,28 +64,26 @@ void student::print(){
     <<"is active:"<<is_active;
 }
 bool student::cancel_reservation(Reservation res){
-for (const Reservatin&r:reservations){
+for (Reservation&r:reservations){
     if (r.getreservation_id()==res.getreservation_id()){
         if(r.cancel()){
             balance+= res.getmeal().getprice()*0.8;
             return true;
         }
-
-    }
-    
+    }  
 }
-return false;
-}
+return false;}
+enum Reserveday{Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday};
 enum meal_type { breakfast , lunch , dinner};
 class Meal{
     int meal_id;
     string namemeal;
-    
     meal_type t;
+    Reserveday r;
     float price;
     vector<string> side_items;
 public:
-Meal(int id=100,string nm="None",meal_type s=lunch,float p=00.00,const vector<string>& items={}){
+Meal(int id=100,string nm="None",meal_type s=lunch,Reserveday a=Sunday ,float p=00.00,const vector<string>& items={}){
 setmeal_id(id);
 setnamemeal(nm);
 setprice(p);
@@ -94,6 +93,7 @@ setside_item(items);
 void setmeal_id(int);
 void setnamemeal(string);
 void setmeal_type(meal_type);
+void setReserveday(Reserveday);
 void setside_item(const vector<string>& newside_item);
 void setprice(float);
 void update_price(float);
@@ -110,6 +110,9 @@ void Meal::setnamemeal(string n){
     namemeal=n;}
 void Meal::setmeal_type(meal_type s){
     meal_type t = meal_type(s);}
+void Meal::setReserveday(Reserveday a){
+    r=a;
+}
 void Meal::setside_item(const vector<string>& newside_item){
     side_items=newside_item;}
 void Meal::setprice(float p){
