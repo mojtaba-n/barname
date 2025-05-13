@@ -30,7 +30,16 @@ string getname(){return name;}
 string getlastname(){return lastname;}
 string gethashpassword(){return hashed_password;} 
 };
-class student
+class Admin:public User{
+    public:
+    Admin(int u, string n, string ln, string hp):User(u,n,ln,hp){}
+    void print()const{
+    cout<<"\nuserId:"<<userID<<"\nname:"<<name<<"\nlastname:"<<lastname<<"\nhashpassword:"<<hashed_password;
+    }
+    void gettype(){cout<<"Admin";}
+};
+
+class student:public User
 {
 private:
 int user_id;
