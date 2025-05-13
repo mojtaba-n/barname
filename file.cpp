@@ -43,15 +43,17 @@ class student:public User
 {
 private:
 string student_id;
+string phone;
 string email;
 float balance;
 bool is_active;
 vector<Reservation> reservations;
 
 public:
-student(int uid,string sid="403122",string n,string mail="nothing@email.com",
+student(int uid,string sid="403122",string n,string p,string mail="nothing@email.com",
 float ba=00.00,bool active=true,string ln, string hp):User(uid,n,ln,hp){
     setstudent_id(sid);
+    setphone(p);
     setemail(mail);
     setbalance(ba);
     setis_active(active);
@@ -60,10 +62,12 @@ void setstudent_id(string);
 void setemail(string);
 void setbalance(float);
 void setis_active(bool);
+void setphone(string);
 string getstudent_id();
 string getemail();
 float getbalance();
 bool getis_active();
+string getphone();
 void print();
 bool cancel_reservation(Reservation);
 void reserve_meal(Meal,DiningHall);
@@ -74,10 +78,13 @@ void student::setbalance(float ba){
     balance=ba;}
 void student::setis_active(bool active){
 is_active=active;}            
+void student::setphone(string p){
+    phone=p;}
 string student::getstudent_id(){return student_id;}
 string student::getemail(){return email;}
 float student::getbalance(){return balance;}
 bool student::getis_active(){return is_active;}
+string student::getphone(){return phone;}
 void student::print(){
     cout<<"user id:"<<userID<<"student id:"<<student_id
     <<"name:"<<name<<"latname:"<<lastname<<"email:"<<email<<"balance:"<<balance
@@ -220,13 +227,11 @@ public:
         created_at=craet;
     }
     void setreservatin_id(int);
-    void setstudent(student);
     void setdhll(DiningHall);
     void setmeal(Meal);
     void setstatus(Status);
     void setcreated_at(time_t);
     int getreservation_id()const{return reservation_id;}
-    student getstudent()const{return Student;}
     DiningHall getdhall()const{return dhall;}
     Meal getmeal()const{return meal;}
     Status getstatus ()const{return status;}
@@ -236,8 +241,6 @@ public:
     };
     void Reservation::setreservatin_id(int id){
         reservation_id=id;}
-    void Reservation::setstudent(student st){
-        Student=st;}
     void Reservation::setdhll(DiningHall d){
         dhall=d;}
     void Reservation::setmeal(Meal m){
@@ -253,7 +256,6 @@ public:
         else return false;
     }
     void Reservation::print(){
-        Student.print();
         meal.print();
         dhall.print();
         cout<<"\nreservation id:"<<reservation_id
