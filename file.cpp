@@ -42,32 +42,25 @@ class Admin:public User{
 class student:public User
 {
 private:
-int user_id;
 string student_id;
-string name;
 string email;
 float balance;
 bool is_active;
 vector<Reservation> reservations;
 
 public:
-student(int uid=1000,string sid="403122",string n="None",string mail="nothing@email.com",float ba=00.00,bool active=true){
-    setuser_id(uid);
+student(int uid,string sid="403122",string n,string mail="nothing@email.com",
+float ba=00.00,bool active=true,string ln, string hp):User(uid,n,ln,hp){
     setstudent_id(sid);
-    setname(n);
     setemail(mail);
     setbalance(ba);
     setis_active(active);
 }
-void setuser_id(int);
 void setstudent_id(string);
-void setname(string);
 void setemail(string);
 void setbalance(float);
 void setis_active(bool);
-int getuser_id();
 string getstudent_id();
-string getname();
 string getemail();
 float getbalance();
 bool getis_active();
@@ -75,28 +68,20 @@ void print();
 bool cancel_reservation(Reservation);
 void reserve_meal(Meal,DiningHall);
 };
-void student::setuser_id(int uid){
-    if(uid<1000 || uid>9999){
-        user_id=1000;}
-    else user_id=uid ;}
 void student::setstudent_id(string sid){
     student_id=sid;}
-void student::setname(string n){
-    name=n;}
 void student::setbalance(float ba){
     balance=ba;}
 void student::setis_active(bool active){
 is_active=active;}            
-int student::getuser_id(){return user_id;}
 string student::getstudent_id(){return student_id;}
-string student::getname(){return name;}
 string student::getemail(){return email;}
 float student::getbalance(){return balance;}
 bool student::getis_active(){return is_active;}
 void student::print(){
-    cout<<"user id:"<<user_id<<"student id:"<<student_id
-    <<"name:"<<name<<"email:"<<email<<"balance:"<<balance
-    <<"is active:"<<is_active;
+    cout<<"user id:"<<userID<<"student id:"<<student_id
+    <<"name:"<<name<<"latname:"<<lastname<<"email:"<<email<<"balance:"<<balance
+    <<"is active:"<<is_active<<"hash password:"<<hashed_password;
 }
 bool student::cancel_reservation(Reservation res){
 for (Reservation&r:reservations){
@@ -120,7 +105,7 @@ void student::reserve_meal(Meal meal, DiningHall hall) {
     else{
     balance -= meal.getprice();
     time_t now = time(0);
-    Reservation new_reservation(rand() % 9000 + 1000, *this, hall, meal,reserv, now);
+    Reservation new_reservation(rand(),hall, meal,reserv, now);
     reservations.push_back(new_reservation);
     cout << "Reservation successful\n";
 }
@@ -222,15 +207,13 @@ void DiningHall::print(){
 enum Status{reserv ,notreserv,cancelreserv};
 class Reservation{
 int reservation_id;
-student Student;
 DiningHall dhall;
 Meal meal;
 Status status;
 time_t created_at;
 public:
-    Reservation(int id=10000,student stu ,DiningHall hall, Meal m, Status s=notreserv, time_t craet){
+    Reservation(int id=10000,DiningHall hall, Meal m, Status s=notreserv, time_t craet){
         reservation_id=id;
-        Student=stu;
         dhall=hall;
         meal=m;
         status=s;
