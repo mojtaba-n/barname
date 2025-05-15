@@ -30,15 +30,37 @@ string getname(){return name;}
 string getlastname(){return lastname;}
 string gethashpassword(){return hashed_password;} 
 };
+void User::setuserId(int i){
+if(i<0){
+    userID=(i*-1);}
+    else userID=i;   
+}
+void User::setname(string n){
+    name=n;
+}
+void User::setlastname(string ln){
+    lastname=ln;
+}
+void User::sethashpassword(string hs){
+    hashed_password=hs;
+}
+void User::print()const{
+    cout<<"\nname:"<<name<<"\tlastname:"<<lastname<<"\tuser ID:"<<userID
+    <<"\thashed password:"<<hashed_password;
+}
+void User::getType(){
+    cout<<"user";
+}
 class Admin:public User{
     public:
     Admin(int u, string n, string ln, string hp):User(u,n,ln,hp){}
-    void print()const{
-    cout<<"\nuserId:"<<userID<<"\nname:"<<name<<"\nlastname:"<<lastname<<"\nhashpassword:"<<hashed_password;
-    }
+    void print()const;
     void gettype(){cout<<"Admin";}
 };
-
+void Admin::print()const{
+    User::print();
+    cout<<"\tAdmin";
+}
 class student:public User
 {
 private:
@@ -71,7 +93,11 @@ string getphone();
 void print();
 bool cancel_reservation(Reservation);
 void reserve_meal(Meal,DiningHall);
+void getType();
 };
+void getType(){
+    cout<<"student";
+}
 void student::setstudent_id(string sid){
     student_id=sid;}
 void student::setbalance(float ba){
@@ -86,9 +112,11 @@ float student::getbalance(){return balance;}
 bool student::getis_active(){return is_active;}
 string student::getphone(){return phone;}
 void student::print(){
-    cout<<"user id:"<<userID<<"student id:"<<student_id
-    <<"name:"<<name<<"latname:"<<lastname<<"email:"<<email<<"balance:"<<balance
-    <<"is active:"<<is_active<<"hash password:"<<hashed_password;
+    User::print();
+    getType();
+    cout<<"\tstudent id:"<<student_id
+    <<"\temail:"<<email<<"\tbalance:"<<balance
+    <<"\tis active:"<<is_active;
 }
 bool student::cancel_reservation(Reservation res){
 for (Reservation&r:reservations){
