@@ -289,3 +289,20 @@ public:
         cout<<"\nreservation id:"<<reservation_id
         <<"\ncreated at :"<<created_at;
     }
+class Panel{
+public:
+void Action(int);
+void showMenu();
+void showStudentInfo();
+void checkBalance();
+void viewReservations();
+void addReservation(Reservation);
+void addToShoppingcart();
+void confirmShoppingcart();
+void removeShoppingCartItem();
+void increaseBalance();
+void viewRecentTransactions();
+void cancelReservatin(int);
+void exit();
+    };
+    
