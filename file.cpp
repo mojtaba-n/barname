@@ -305,4 +305,21 @@ void viewRecentTransactions();
 void cancelReservatin(int);
 void exit();
     };
-    
+class storage{
+int mealIDCounter=10;
+int diningHallIDCounter=1000;
+vector<Meal>allMeals;
+vector<DiningHall>allDiningHalls;
+storage(){}
+public:
+storage(const storage&)= delete;
+void operator=(const storage&)= delete;
+static storage& getInstance(){
+    static storage instance;
+    return instance;
+}
+int generateMealId(){
+    return mealIDCounter++;}
+int generateHallId(){
+    return diningHallIDCounter++;}    
+};    
