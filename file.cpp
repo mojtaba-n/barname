@@ -129,6 +129,7 @@ for (Reservation&r:reservations){
 }
 return false;}
 void student::reserve_meal(Meal meal, DiningHall hall) {
+    if (is_active){
     if (balance < meal.getprice()) {
         cout << "Error:no many\n";
     }
@@ -143,6 +144,7 @@ void student::reserve_meal(Meal meal, DiningHall hall) {
     Reservation new_reservation(rand(),hall, meal,reserv, now);
     reservations.push_back(new_reservation);
     cout << "Reservation successful\n";
+}
 }
 }
 }
@@ -162,6 +164,13 @@ setnamemeal(nm);
 setprice(p);
 meal_type t= meal_type(s);
 setside_item(items);
+}
+Meal(const Meal& ob){
+    meal_id=ob.meal_id;
+    namemeal=ob.namemeal;
+    price=ob.price;
+    meal_type t=ob.t;
+    Reserveday r=ob.r;
 }
 void setmeal_id(int);
 void setnamemeal(string);
@@ -213,6 +222,12 @@ sethall_id(id);
 name_dininghall=name;
 address=ads;
 setcapacity(cpc);}
+DiningHall(const DiningHall&ob){
+    hall_id=ob.hall_id;
+    name_dininghall=ob.name_dininghall;
+    address=ob.address;
+    capacity=ob.capacity;
+}
 void sethall_id(int);
 void setname_dininghall(string);
 void setaddress(string);
@@ -242,15 +257,15 @@ void DiningHall::print(){
 enum Status{reserv ,notreserv,cancelreserv};
 class Reservation{
 int reservation_id;
-DiningHall dhall;
-Meal meal;
+DiningHall* dhall;
+Meal*meal;
 Status status;
 time_t created_at;
 public:
     Reservation(int id=10000,DiningHall hall, Meal m, Status s=notreserv, time_t craet){
         reservation_id=id;
-        dhall=hall;
-        meal=m;
+        DiningHall dhall(hall);
+        Meal meal(m);
         status=s;
         created_at=craet;
     }
@@ -260,8 +275,8 @@ public:
     void setstatus(Status);
     void setcreated_at(time_t);
     int getreservation_id()const{return reservation_id;}
-    DiningHall getdhall()const{return dhall;}
-    Meal getmeal()const{return meal;}
+    DiningHall getdhall()const{return *dhall;}
+    Meal getmeal()const{return *meal;}
     Status getstatus ()const{return status;}
     time_t getcreated_at()const{return created_at;}
     bool cancel();
@@ -270,9 +285,9 @@ public:
     void Reservation::setreservatin_id(int id){
         reservation_id=id;}
     void Reservation::setdhll(DiningHall d){
-        dhall=d;}
+        DiningHall dhall(d);}
     void Reservation::setmeal(Meal m){
-        meal=m;}
+        Meal meal(m);}
     void Reservation::setstatus(Status s){
         status=s;}            
     void Reservation::setcreated_at(time_t t){
@@ -284,8 +299,8 @@ public:
         else return false;
     }
     void Reservation::print(){
-        meal.print();
-        dhall.print();
+        meal->print();
+        dhall->print();
         cout<<"\nreservation id:"<<reservation_id
         <<"\ncreated at :"<<created_at;
     }
