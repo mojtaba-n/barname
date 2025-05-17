@@ -362,4 +362,28 @@ void setamount(float);
 void setTransactionType(TransactionType);
 void setTransactionStatus(TransactionStatus);
 void setcreatedAt(time_t);
+int gettransaction(){return transactionID;}
+string gettrackingCode(){return trackingCode;}
+float getamount(){return amount;}
+TransactionType getTransactionType(){return type;}
+TransactionStatus getTransactionStatus(){return status;}
+time_t getcreatedAt(){return createdAt;}
 };
+void Transaction::settransaction(int ID){
+    transactionID=ID;
+}
+void Transaction::settrackingCode(string code){
+    trackingCode=code;
+}
+void Transaction::setamount(float a){
+    amount=a;
+}
+void Transaction::setTransactionType(TransactionType t){
+    type=t;
+}
+void Transaction::setTransactionStatus(TransactionStatus s){
+    status =s;
+}
+void Transaction::setcreatedAt(time_t tt){
+    createdAt=tt;
+}
