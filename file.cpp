@@ -338,3 +338,28 @@ int generateMealId(){
 int generateHallId(){
     return diningHallIDCounter++;}    
 };    
+enum TransactionType{TRANSFER,PAYMENT};
+enum TransactionStatus{PENDING,COMPLETED,FIALED};
+class Transaction{
+    int transactionID;
+    string trackingCode;
+    float amount;
+    TransactionType type;
+    TransactionStatus status;
+    time_t createdAt;
+public:
+Transaction(int tID,string tcode,float at,TransactionType t,TransactionStatus s,time_t creat){
+settransaction(tID);
+settrackingCode(tcode);
+setamount(at);
+setTransactionType(t);
+setTransactionStatus(s);
+setcreatedAt(creat);    
+}
+void settransaction(int);
+void settrackingCode(string);
+void setamount(float);
+void setTransactionType(TransactionType);
+void setTransactionStatus(TransactionStatus);
+void setcreatedAt(time_t);
+};
