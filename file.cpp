@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <algorithm>
 using namespace std;
 class Meal;
 class Reservation;
@@ -280,7 +281,7 @@ public:
     RStatus getstatus ()const{return status;}
     time_t getcreated_at()const{return created_at;}
     bool cancel();
-    void print();
+    void print()const;
     };
     void Reservation::setreservatin_id(int id){
         reservation_id=id;}
@@ -298,7 +299,7 @@ public:
             return true;}
         else return false;
     }
-    void Reservation::print(){
+    void Reservation::print()const{
         meal->print();
         dhall->print();
         cout<<"\nreservation id:"<<reservation_id
@@ -391,8 +392,8 @@ class ShoppingCart{
 vector<Reservation>reservations;
 public:
 Transaction confirm();
-void addReservation(Reservation reservation);
-void removeReservation(int ID);
+void addReservation(Reservation);
+void removeReservation(int);
 void viewShoppingCartItems();
 void clear();
 const vector<Reservation>getReservations();
@@ -401,5 +402,20 @@ void ShoppingCart::addReservation(Reservation r){
  r.setstatus(NOT_PAID);
  reservations.push_back(r);   
 }
+void ShoppingCart::removeReservation(int ID){
+reservations.erase(remove_if(reservations.begin(),reservations.end()
+,[ID](const Reservation& r){return r.getreservation_id()==ID;}
+),reservations.end());
+ }    
 
-
+void ShoppingCart::viewShoppingCartItems(){
+    for(const auto&r :reservations){
+        r.print();
+    }
+}
+void ShoppingCart::clear(){
+    reservations.clear();
+}
+const vector<Reservation> ShoppingCart::getReservations(){
+        return reservations;
+    }
