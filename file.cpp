@@ -419,3 +419,28 @@ void ShoppingCart::clear(){
 const vector<Reservation> ShoppingCart::getReservations(){
         return reservations;
     }
+enum SessionStatus{AUTHENTICATED,ANONYMOUS};    
+class SessionBase{
+protected:
+time_t createdAt;
+time_t lastTimeLogin;
+SessionStatus status;
+virtual void loud_session()=0;
+virtual void save_session()=0;
+public:
+virtual void login(string,string)=0;
+virtual void logout()=0;
+void set_createdAt(time_t);
+void set_lastlogin(time_t);
+void set_status(SessionStatus);
+time_t get_createdAt(){return createdAt;};
+time_t get_lastlogin(){return lastTimeLogin;};
+SessionStatus getstatus(){return status;}
+};
+void SessionBase::set_createdAt(time_t c){
+    createdAt=c;}
+void SessionBase::set_lastlogin(time_t l){
+    lastTimeLogin=l;}
+void SessionBase::set_status(SessionStatus s){
+status=s;}        
+
