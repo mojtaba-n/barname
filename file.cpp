@@ -141,7 +141,7 @@ void student::reserve_meal(Meal meal, DiningHall hall) {
     else{
     balance -= meal.getprice();
     time_t now = time(0);
-    Reservation new_reservation(rand(),hall, meal,reserv, now);
+    Reservation new_reservation(rand(),hall, meal,SUCCESS, now);
     reservations.push_back(new_reservation);
     cout << "Reservation successful\n";
 }
@@ -254,15 +254,15 @@ void DiningHall::print(){
     cout<<"\nname Dininghall:"<<name_dininghall
     <<"\nId Dininghall:"<<hall_id<<"\naddress:"
     <<address<<"\ncapacity:"<<capacity;}        
-enum Status{reserv ,notreserv,cancelreserv};
+enum RStatus{SUCCESS ,CANCELLED,FAILED,NOT_PAID};
 class Reservation{
 int reservation_id;
 DiningHall* dhall;
 Meal*meal;
-Status status;
+RStatus status;
 time_t created_at;
 public:
-    Reservation(int id=10000,DiningHall hall, Meal m, Status s=notreserv, time_t craet){
+    Reservation(int id=10000,DiningHall hall, Meal m, RStatus s=FAILED, time_t craet){
         reservation_id=id;
         DiningHall dhall(hall);
         Meal meal(m);
@@ -272,12 +272,12 @@ public:
     void setreservatin_id(int);
     void setdhll(DiningHall);
     void setmeal(Meal);
-    void setstatus(Status);
+    void setstatus(RStatus);
     void setcreated_at(time_t);
     int getreservation_id()const{return reservation_id;}
     DiningHall getdhall()const{return *dhall;}
     Meal getmeal()const{return *meal;}
-    Status getstatus ()const{return status;}
+    RStatus getstatus ()const{return status;}
     time_t getcreated_at()const{return created_at;}
     bool cancel();
     void print();
@@ -288,13 +288,13 @@ public:
         DiningHall dhall(d);}
     void Reservation::setmeal(Meal m){
         Meal meal(m);}
-    void Reservation::setstatus(Status s){
+    void Reservation::setstatus(RStatus s){
         status=s;}            
     void Reservation::setcreated_at(time_t t){
         created_at=t;}
     bool Reservation::cancel(){
-        if(status==reserv){
-            status= cancelreserv;
+        if(status==SUCCESS){
+            status= CANCELLED;
             return true;}
         else return false;
     }
@@ -387,3 +387,19 @@ void Transaction::setTransactionStatus(TransactionStatus s){
 void Transaction::setcreatedAt(time_t tt){
     createdAt=tt;
 }
+class ShoppingCart{
+vector<Reservation>reservations;
+public:
+Transaction confirm();
+void addReservation(Reservation reservation);
+void removeReservation(int ID);
+void viewShoppingCartItems();
+void clear();
+const vector<Reservation>getReservations();
+};
+void ShoppingCart::addReservation(Reservation r){
+ r.setstatus(NOT_PAID);
+ reservations.push_back(r);   
+}
+
+
