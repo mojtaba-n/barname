@@ -3,6 +3,7 @@
 #include <ctime>
 #include <algorithm>
 using namespace std;
+using namespace StudentSession;
 class Meal;
 class Reservation;
 class DiningHall;
@@ -442,5 +443,22 @@ void SessionBase::set_createdAt(time_t c){
 void SessionBase::set_lastlogin(time_t l){
     lastTimeLogin=l;}
 void SessionBase::set_status(SessionStatus s){
-status=s;}        
+status=s;}
+namespace StudentSession{
+    class SesstionManager :public SessionBase{
+    student*currentStudent;
+    ShoppingCart*shopping_cart;
+    int studentID;
+    void load_session();
+    void save_session();
+    public:
+    void login(string,string);
+    void logout();
+    student currentStudent();
+    ShoppingCart shoppingCart();
+    student getcurrentStudent(){return *currentStudent;}
+    ShoppingCart getshoppingCart(){return *shopping_cart;}
+    int getstudentID(){return studentID;}
+    };
+}        
 
